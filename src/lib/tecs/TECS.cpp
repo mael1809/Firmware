@@ -265,6 +265,10 @@ void TECS::_update_throttle_setpoint(const float throttle_cruise, const matrix::
 {
 	// Calculate total energy error
 	_STE_error = _SPE_setpoint - _SPE_estimate + _SKE_setpoint - _SKE_estimate;
+	
+	// Calculate total energy estimate and setpoint rajouté
+	_STE_estimate = _SPE_estimate + _SKE_estimate;
+	_STE_setpoint = _SPE_setpoint + _SKE_setpoint;
 
 	// Calculate demanded rate of change of total energy, respecting vehicle limits
 	float STE_rate_setpoint = constrain((_SPE_rate_setpoint + _SKE_rate_setpoint), _STE_rate_min, _STE_rate_max);
@@ -415,7 +419,8 @@ void TECS::_update_pitch_setpoint()
 
 	// Calculate the specific energy balance rate demand
 	float SEB_rate_setpoint = _SPE_rate_setpoint * SPE_weighting - _SKE_rate_setpoint * SKE_weighting;
-
+	_SEB_setpoint = SEB_setpoint; // Rajouté
+	
 	// Calculate the specific energy balance and balance rate error
 	_SEB_error = SEB_setpoint - (_SPE_estimate * SPE_weighting - _SKE_estimate * SKE_weighting);
 	_SEB_rate_error = SEB_rate_setpoint - (_SPE_rate * SPE_weighting - _SKE_rate * SKE_weighting);

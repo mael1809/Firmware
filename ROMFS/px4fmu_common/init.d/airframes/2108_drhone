@@ -1,0 +1,28 @@
+#!/bin/sh
+#
+# @name Drhone prototype
+#
+# @type Standard Plane
+# @class Plane
+#
+# @output MAIN1 left aileron
+# @output MAIN2 right aileron
+# @output MAIN3 elevator
+# @output MAIN4 rudder
+# @output MAIN5 throttle left
+# @output MAIN6 throttle right
+# @output MAIN7 flap left
+# @output MAIN8 flap right
+#
+# @maintainer Thierry Bujard <thierry.bujard@hesge.ch>
+
+. /etc/init.d/rc.fw_defaults
+
+if [ $AUTOCNF = yes ]
+then
+	param set PWM_AUX_RATE 50
+	param set PWM_RATE 50
+fi
+
+# use our custom mixer
+set MIXER drhone

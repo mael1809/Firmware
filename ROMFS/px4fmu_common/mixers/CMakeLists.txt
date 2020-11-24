@@ -46,6 +46,7 @@ px4_add_romfs_files(
 	deltaquad.main.mix
 	dodeca_bottom_cox.aux.mix
 	dodeca_top_cox.main.mix
+	drhone.main.mix
 	firefly6.aux.mix
 	firefly6.main.mix
 	fw_generic_wing.main.mix

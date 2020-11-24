@@ -158,6 +158,7 @@ Battery::updateBatteryStatus(hrt_abstime timestamp, float voltage_v, float curre
 		_battery_status.scale = _scale;
 		_battery_status.current_a = current_a;
 		_battery_status.current_filtered_a = _current_filter_a.getState();
+		_battery_status.power_w = current_a*voltage_v; // Rajouté, puissance instantanée
 		_battery_status.discharged_mah = _discharged_mah;
 		_battery_status.warning = _warning;
 		_battery_status.remaining = _remaining;

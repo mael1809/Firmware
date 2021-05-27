@@ -42,7 +42,7 @@ S: 0 0   10000   10000      0  -10000  10000
 
 CH3: Elevator mixer
 ------------
-Two scalers total (output, roll).
+Two scalers total (output, pitch).
 
 This mixer assumes that the elevator servo is set up correctly mechanically;
 depending on the actual configuration it may be necessary to reverse the scaling

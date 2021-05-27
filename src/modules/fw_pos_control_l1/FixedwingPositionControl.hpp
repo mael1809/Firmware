@@ -89,6 +89,8 @@
 #include <uORB/topics/vehicle_status.h>
 #include <uORB/uORB.h>
 #include <vtol_att_control/vtol_type.h>
+//Ajout
+#include <uORB/topics/distance_sensor.h>
 
 using math::constrain;
 using math::max;
@@ -193,6 +195,9 @@ private:
 	bool	_yaw_lock_engaged{false};			///< yaw is locked for heading hold
 	float	_althold_epv{0.0f};				///< the position estimate accuracy when engaging alt hold
 	bool	_was_in_deadband{false};			///< wether the last stick input was in althold deadband
+	// Ajout
+	float _old_terrain_alt{0.0f};			// Mémoire ancienne altitude du terrain
+
 
 	position_setpoint_s _hdg_hold_prev_wp {};		///< position where heading hold started
 	position_setpoint_s _hdg_hold_curr_wp {};		///< position to which heading hold flies

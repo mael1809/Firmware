@@ -34,6 +34,13 @@
 #include "FixedwingPositionControl.hpp"
 
 #include <vtol_att_control/vtol_type.h>
+ 
+
+// Ajout
+#include <uORB/Subscription.hpp>
+#include <uORB/SubscriptionCallback.hpp>
+#include <uORB/topics/distance_sensor.h>
+uORB::Subscription _distance_sensor_subs[4] {{ORB_ID(distance_sensor), 0}, {ORB_ID(distance_sensor), 1}, {ORB_ID(distance_sensor), 2}, {ORB_ID(distance_sensor), 3}};
 
 FixedwingPositionControl::FixedwingPositionControl(bool vtol) :
 	ModuleParams(nullptr),
@@ -510,13 +517,32 @@ FixedwingPositionControl::update_desired_altitude(float dt)
 		_althold_epv = _local_pos.epv;
 		_was_in_deadband = true;
 	}
+	// Ajout
+/*
+		distance_sensor_s sensCollision{};	// Créé un struct de type distance_sensor
 
+		if(_distance_sensor_subs[1].copy(&sensCollision)){	//check si la copie est bien faite
+				if(sensCollision.current_distance < 200.0f){ // si le capteur < 200mm
+					_hold_alt = _hold_alt + 10.0f;	// saut de consigne d'altitude de 10m
+				}
+		}
+*/
+
+	// Distance valid and joystick centered
+	 if (_local_pos.dist_bottom_valid  && _was_in_deadband)
+	{
+		// Calculate the terrain slope
+		float terrain_alt_calc = _local_pos.ref_alt - (_local_pos.dist_bottom + _local_pos.z);
+		float terrain_slope = terrain_alt_calc - _old_terrain_alt;
+		_hold_alt += terrain_slope;
+		_old_terrain_alt = terrain_alt_calc;
+	}
+	
 	if (_vehicle_status.is_vtol) {
 		if (_vehicle_status.vehicle_type == vehicle_status_s::VEHICLE_TYPE_ROTARY_WING || _vehicle_status.in_transition_mode) {
 			_hold_alt = _current_altitude;
 		}
 	}
-
 	return climbout_mode;
 }
 

@@ -1,22 +1,22 @@
 #!/bin/sh
 #
-# @name Standard Plane
+# @name hepia Believer
 #
-# @type Standard Plane
+# @type Plane V-Tail
 # @class Plane
 #
-# @output MAIN1 aileron
-# @output MAIN2 elevator
-# @output MAIN3 throttle
-# @output MAIN4 rudder
-# @output MAIN5 flaps
-# @output MAIN6 gear
+# @output MAIN1 aileron left
+# @output MAIN2 aileron right
+# @output MAIN3 v-tail left
+# @output MAIN4 v-tail right
+# @output MAIN5 throttle left
+# @output MAIN6 throttle right
 #
 # @output AUX1 feed-through of RC AUX1 channel
 # @output AUX2 feed-through of RC AUX2 channel
 # @output AUX3 feed-through of RC AUX3 channel
 #
-# @maintainer Lorenz Meier <lorenz@px4.io>
+# @maintainer Thierry Bujard <thierry.bujard@hesge.ch>
 #
 # @board intel_aerofc-v1 exclude
 # @board bitcraze_crazyflie exclude
@@ -28,10 +28,10 @@ if [ $AUTOCNF = yes ]
 then
 	param set PWM_AUX_RATE 50
 	param set PWM_RATE 50
-
 fi
 
-set MIXER AETRFG
+# Configure this as plane
+set MAV_TYPE 1
 
-# Rate must be set by group (see pwm info).
-# Throttle is in the same group as servos.
+# use our custom mixer
+set MIXER believer

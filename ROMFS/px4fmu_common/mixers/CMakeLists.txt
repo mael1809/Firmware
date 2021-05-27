@@ -47,6 +47,7 @@ px4_add_romfs_files(
 	dodeca_bottom_cox.aux.mix
 	dodeca_top_cox.main.mix
 	drhone.main.mix
+	believer.main.mix
 	firefly6.aux.mix
 	firefly6.main.mix
 	fw_generic_wing.main.mix

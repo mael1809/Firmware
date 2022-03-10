@@ -531,15 +531,16 @@ FixedwingPositionControl::update_desired_altitude(float dt)
 	// Distance valid and joystick centered
 	 if (_local_pos.dist_bottom_valid  && _was_in_deadband)
 	{
-		float terrain_slope = _local_pos.dist_bottom - _old_terrain_alt;
+		/*float terrain_slope = _local_pos.dist_bottom - _old_terrain_alt;
 		_hold_alt += terrain_slope;
-		_old_terrain_alt = _local_pos.dist_bottom;
-		/*// Calculate the terrain slope old 
+		_old_terrain_alt = _local_pos.dist_bottom;*/
+		
+		// Calculate the terrain slope old 
 		float terrain_alt_calc = _local_pos.ref_alt - (_local_pos.dist_bottom + _local_pos.z);
 		float terrain_slope = terrain_alt_calc - _old_terrain_alt;
 		_hold_alt += terrain_slope;
 		_old_terrain_alt = terrain_alt_calc;
-		*/
+		
 	}
 	
 	if (_vehicle_status.is_vtol) {
